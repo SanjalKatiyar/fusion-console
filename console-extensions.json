@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "type": "console.flag",
+    "properties": {
+      "handler": {
+        "$codeRef": "features.enableFusion"
+      }
+    }
+  }
+]

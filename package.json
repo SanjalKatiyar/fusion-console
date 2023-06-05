@@ -44,7 +44,7 @@
     "displayName": "Fusion Console Plugin",
     "description": "Console Plugin for ODF + Fusion Integrated UI.",
     "exposedModules": {
-      "features": "@fusion/core/Features"
+      "features": "@fusion/core/features"
     },
     "dependencies": {
       "@console/pluginAPI": "*"
