@@ -1,35 +1,35 @@
 /* eslint-env node */
-import * as path from "path";
-import { ConsoleRemotePlugin } from "@openshift-console/dynamic-plugin-sdk-webpack";
-import { ForkTsCheckerWebpackPlugin } from "fork-ts-checker-webpack-plugin/lib/plugin";
-import * as webpack from "webpack";
-import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
+import * as path from 'path';
+import { ConsoleRemotePlugin } from '@openshift-console/dynamic-plugin-sdk-webpack';
+import { ForkTsCheckerWebpackPlugin } from 'fork-ts-checker-webpack-plugin/lib/plugin';
+import * as webpack from 'webpack';
+import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 
 const NODE_ENV = (process.env.NODE_ENV ||
-  "development") as webpack.Configuration["mode"];
+  'development') as webpack.Configuration['mode'];
 
 const config: webpack.Configuration & DevServerConfiguration = {
   context: __dirname,
   mode: NODE_ENV,
   entry: {},
   output: {
-    path: path.resolve("./build"),
-    filename: "[name]-bundle.js",
-    chunkFilename: "[name]-chunk.js",
+    path: path.resolve('./build'),
+    filename: '[name]-bundle.js',
+    chunkFilename: '[name]-chunk.js',
   },
-  ignoreWarnings: [(warning) => !!warning?.file?.includes("shared module")],
+  ignoreWarnings: [(warning) => !!warning?.file?.includes('shared module')],
   watchOptions: {
-    ignored: ["node_modules", "build"],
+    ignored: ['node_modules', 'build'],
   },
   devServer: {
     port: 9010,
     devMiddleware: {
       writeToDisk: true,
     },
-    static: ["build"],
+    static: ['build'],
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   module: {
     rules: [
@@ -38,17 +38,17 @@ const config: webpack.Configuration & DevServerConfiguration = {
         exclude: /node_modules/,
         use: [
           {
-            loader: "thread-loader",
+            loader: 'thread-loader',
             options: {
-              ...(NODE_ENV === "development"
+              ...(NODE_ENV === 'development'
                 ? { poolTimeout: Infinity, poolRespawn: false }
                 : {}),
             },
           },
           {
-            loader: "ts-loader",
+            loader: 'ts-loader',
             options: {
-              configFile: path.resolve(__dirname, "tsconfig.json"),
+              configFile: path.resolve(__dirname, 'tsconfig.json'),
               transpileOnly: true,
               happyPackMode: true,
             },
@@ -63,33 +63,33 @@ const config: webpack.Configuration & DevServerConfiguration = {
           /packages/,
         ],
         use: [
-          { loader: "cache-loader" },
+          { loader: 'cache-loader' },
           {
-            loader: "thread-loader",
+            loader: 'thread-loader',
             options: {
-              ...(NODE_ENV === "development"
+              ...(NODE_ENV === 'development'
                 ? { poolTimeout: Infinity, poolRespawn: false }
                 : {}),
             },
           },
-          { loader: "style-loader" },
+          { loader: 'style-loader' },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               sourceMap: true,
             },
           },
           {
-            loader: "resolve-url-loader",
+            loader: 'resolve-url-loader',
             options: {
               sourceMap: true,
             },
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sassOptions: {
-                outputStyle: "compressed",
+                outputStyle: 'compressed',
                 quietDeps: true,
               },
               sourceMap: true,
@@ -99,13 +99,13 @@ const config: webpack.Configuration & DevServerConfiguration = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|woff2?|ttf|eot|otf)(\?.*$|$)/,
-        loader: "file-loader",
+        loader: 'file-loader',
         options: {
-          name: "assets/[name].[ext]",
+          name: 'assets/[name].[ext]',
         },
       },
     ],
@@ -113,11 +113,11 @@ const config: webpack.Configuration & DevServerConfiguration = {
   plugins: [
     new ConsoleRemotePlugin(),
     new webpack.ProvidePlugin({
-      Buffer: ["buffer", "Buffer"],
+      Buffer: ['buffer', 'Buffer'],
     }),
     new ForkTsCheckerWebpackPlugin({
       issue: {
-        exclude: [{ file: "**/node_modules/**/*" }],
+        exclude: [{ file: '**/node_modules/**/*' }],
       },
       typescript: {
         diagnosticOptions: {
@@ -127,9 +127,9 @@ const config: webpack.Configuration & DevServerConfiguration = {
       },
     }),
   ],
-  devtool: "cheap-module-source-map",
+  devtool: 'cheap-module-source-map',
   optimization: {
-    chunkIds: "named",
+    chunkIds: 'named',
   },
 };
 
