@@ -5,7 +5,8 @@
   "license": "Apache-2.0",
   "scripts": {
     "build": "yarn ts-node node_modules/.bin/webpack -c ./webpack.config.ts",
-    "dev": "yarn ts-node node_modules/.bin/webpack servr -c ./webpack.config.ts --progress"
+    "dev": "yarn ts-node node_modules/.bin/webpack serve -c ./webpack.config.ts --progress",
+    "ts-node": "ts-node -O '{\"module\":\"commonjs\"}' -I '/node_modules/(?!(@fusion)/)/'"
   },
   "workspaces": [
     "packages/*"
@@ -29,8 +30,12 @@
     "@types/react": "^17.0.37",
     "@types/react-helmet": "^6.1.4",
     "@types/react-router-dom": "^5.3.2",
+    "cache-loader": "^4.1.0",
     "fork-ts-checker-webpack-plugin": "^8.0.0",
+    "thread-loader": "^4.0.2",
+    "ts-loader": "^9.4.3",
     "webpack": "^5.85.0",
+    "webpack-cli": "^5.1.3",
     "webpack-dev-server": "^4.15.0"
   },
   "consolePlugin": {
@@ -38,7 +43,9 @@
     "version": "0.0.0",
     "displayName": "Fusion Console Plugin",
     "description": "Console Plugin for ODF + Fusion Integrated UI.",
-    "exposedModules": {},
+    "exposedModules": {
+      "features": "@fusion/core/Features"
+    },
     "dependencies": {
       "@console/pluginAPI": "*"
     }
