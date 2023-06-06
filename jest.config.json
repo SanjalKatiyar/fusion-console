@@ -1,0 +1,22 @@
+{
+    "preset": "./node_modules/ts-jest",
+    "collectCoverageFrom": ["./packages/**/*.{ts,tsx}"],
+    "moduleNameMapper": {
+      "^lodash-es$": "lodash",
+      "\\.(css|scss)$": "identity-obj-proxy"
+    },
+    "roots": ["./packages/"],
+    "setupFilesAfterEnv": [
+        "./__mocks__/jest-dom.ts",
+        "./__mocks__/serverFlags.ts",
+        "./__mocks__/react-i18next.ts"
+    ],
+    "testEnvironment": "jsdom",
+    "transform": {
+      "\\.[jt]sx?$": "@swc/jest"
+    },
+    "transformIgnorePatterns": [
+      "./node_modules/(?!(@openshift-console)/ | ?!(@patternfly/react-core/dist))/"
+    ],
+    "testRegex": ".*\\.spec\\.tsx?$"
+}
