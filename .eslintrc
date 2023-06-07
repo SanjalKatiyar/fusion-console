@@ -1,0 +1,119 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "project": ["./tsconfig.json"]
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  },
+  "extends": [
+    "semistandard",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:prettier/recommended",
+    "airbnb-typescript"
+  ],
+  "plugins": ["react", "prettier", "jsx-a11y", "check-file"],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off",
+    "react/button-has-type": "error",
+    "react/no-array-index-key": "error",
+    "react/display-name": "error",
+    "react/jsx-no-bind": "error",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "packageDir": [".", "./packages/fusion"]
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": "warn",
+    /**
+     * File/Folder naming conventions
+     * */
+    "check-file/filename-naming-convention": [
+      "error",
+      {
+        "**/*.tsx": "PASCAL_CASE",
+        "**/*.{js,ts,mts}": "CAMEL_CASE"
+      }
+    ],
+    "check-file/folder-naming-convention": [
+      "error",
+      {
+        "packages/**/": "CAMEL_CASE",
+        "packages/**/src/components/*": "PASCAL_CASE",
+        "packages/**/src/pages/*": "PASCAL_CASE"
+      }
+    ],
+    "check-file/folder-match-with-fex": [
+      "error",
+      {
+        "**/*.tsx": "packages/{packageName}/src/components OR packages/{packageName}/src/pages"
+      }
+    ],
+    /**
+     * Code naming conventions
+     * */
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "parameter",
+        "format": ["camelCase"]
+      },
+      {
+        "selector": "function",
+        "format": ["camelCase", "PascalCase"]
+      },
+      {
+        "selector": "variable",
+        "format": ["camelCase", "PascalCase"]
+      },
+      {
+        "selector": "variable",
+        "modifiers": ["const"],
+        "format": ["camelCase", "PascalCase", "UPPER_CASE"]
+      },
+      {
+        "selector": "variable",
+        "types": ["boolean"],
+        "format": ["PascalCase"],
+        "prefix": ["is", "should", "has", "can", "did", "will"]
+      },
+      {
+        "selector": "enum",
+        "format": ["PascalCase"]
+      },
+      {
+        "selector": "typeParameter",
+        "format": ["PascalCase"],
+        "prefix": ["T"]
+      },
+      {
+        "selector": [
+          "classProperty",
+          "objectLiteralProperty",
+          "typeProperty",
+          "classMethod",
+          "objectLiteralMethod",
+          "typeMethod",
+          "accessor",
+          "enumMember"
+        ],
+        "format": null,
+        "modifiers": ["requiresQuotes"]
+      }
+    ]
+  }
+}

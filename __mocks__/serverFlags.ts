@@ -1,4 +1,4 @@
 window['SERVER_FLAGS'] = {
-    basePath: '/',
-    consolePlugins: [],
+  basePath: '/',
+  consolePlugins: [],
 };
